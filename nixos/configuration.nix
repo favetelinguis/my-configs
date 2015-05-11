@@ -1,7 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+# This file contains a function with the format
+# { input }: {output (name value paris of options)}
+# pkgs is the set of all nix packages (what channel are they from?)
+# config is the current environment, can check curernt values of options.
 { config, pkgs, ... }:
 
 {

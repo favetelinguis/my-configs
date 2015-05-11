@@ -1,5 +1,8 @@
 Select what files to install
 
+    ZSH pretzo requires manual installation, see github.
+    i have made changes in zshrc of prezi
+
 recured to get vundle working
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 

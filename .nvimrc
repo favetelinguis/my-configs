@@ -14,7 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp'
+Plugin 'tpope/vim-fugitive'
 " Vundle End {{{
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -82,7 +82,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 set laststatus=2
 
 " Set the status line to something useful
-set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
+set statusline=%f\ %=L:%l/%L\ %c\ (%p%%) %{fugitive#statusline()}
 
 " UTF encoding
 set encoding=utf-8
@@ -155,17 +155,4 @@ colorscheme solarized
 map <leader>' :NERDTreeToggle<cr>
 " NerdTree END
 
-" CTRLP Start
-map <leader>t <C-p>
-map <leader>y :CtrlPBuffer<cr>
-let g:ctrlp_show_hidden=1
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_max_height=30
-" CtrlP -> override <C-o> to provide options for how to open files
-let g:ctrlp_arg_map = 1
-" CtrlP -> files matched are ignored when expanding wildcards
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
-" CtrlP -> directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
-" CTRLP END
 " }}}
