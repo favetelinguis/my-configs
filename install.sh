@@ -1,5 +1,7 @@
 Select what files to install
 
+    diff
+
     ZSH pretzo requires manual installation, see github.
     i have made changes in zshrc of prezi
 

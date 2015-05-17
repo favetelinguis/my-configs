@@ -45,6 +45,10 @@
 	pidgin
 	git
 	termite
+	leiningen
+	irssi
+	ctags # Used by tagbar in vim
+        python3 #DO I RLY NEED THIS
 	haskellPackages.ghc
 	haskellPackages.hdevtools # Used in Vim to inteact with GHC
 	haskellPackages.hlint # Lint for Vim
