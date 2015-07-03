@@ -1,0 +1,15 @@
+session=$1
+tmux has-session -t $session
+if [ $? != 0 ]
+then
+    tmux new-session -s $session -n editor -d
+    tmux send-keys -t $session 'vim' C-m
+    tmux split-window -v -p 20 -t $session
+    tmux split-window -h -t $session:1.2
+    tmux send-keys -t $session:1.2 'cabal repl' C-m
+    tmux new-window -n console -t $session
+    tmux select-window -t $session:1
+    tmux attach -t $session
+else
+    echo 'SESSION ALREADY EXISTS'
+fi
