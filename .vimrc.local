@@ -68,9 +68,6 @@ let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
-" highlight a matching [{()}] when cursor is placed on start/end character
-set showmatch
-
 " Highlight the current line
 set cursorline
 
@@ -109,5 +106,31 @@ let g:solarized_termcolors=256
 
 " Always highlight column 80 so it's easier to see where
 " cutoff appears on longer screens
-autocmd BufWinEnter * highlight ColorColumn ctermbg=gray
-set colorcolumn=80
+"autocmd BufWinEnter * highlight ColorColumn ctermbg=gray
+"set colorcolumn=80
+"gundo settings
+let g:gundo_close_on_revert = 1
+let g:gundo_preview_bottom = 1
+" make gundo persistence in case of crash
+set undodir=~/.vim/tmp/undo//
+set undofile
+set history=100
+set undolevels=100
+
+" Used for bbye plugin to close panes witout changing layout
+:nnoremap <Leader>bq :Bdelete<CR>
+" used for toggeling between two buffers
+nmap <Leader>bb :b#<cr>
+
+" Set the status line to something useful
+" set statusline=[%n]     "buffernr
+" set statusline+=[%l\/%L]
+" set statusline+=%{fugitive#statusline()}
+" set statusline+=%=%F%m%r%h%w
+
+" Move between hunks with git gutter
+nmap <Leader>h] <Plug>GitGutterNextHunk
+nmap <Leader>h[ <Plug>GitGutterPrevHunk
+
+" Ctrlp stuff
+let g:ctrlp_show_hidden=1
