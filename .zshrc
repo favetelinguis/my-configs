@@ -35,7 +35,7 @@ function tmuxkill() {
 # }}}
 
 # Alias' {{{
-alias vi="nvim"
+alias vi="vim"
 alias ide=". ~/my-configs/tmux/hs"
 alias r="source ~/.zshrc"
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
