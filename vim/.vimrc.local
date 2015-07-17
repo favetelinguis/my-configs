@@ -135,3 +135,5 @@ set undolevels=100
 
 " Ctrlp stuff
 " let g:ctrlp_show_hidden=1
+" Use ii in insert mode to enter normal mode
+inorema ii <Esc>
