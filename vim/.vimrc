@@ -128,8 +128,8 @@ endif
 set cmdheight=1
 
 " Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+" set backspace=eol,start,indent
+" set whichwrap+=<,>,h,l
 
 " Ignore case when searching
 set ignorecase
