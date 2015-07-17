@@ -37,13 +37,13 @@ let g:tagbar_autofocus = 1
 " noremap <leader>bl <c-w>L
 
 " Change colourscheme when diffing
-fun! SetDiffColors()
-  highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
-  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
-  highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
-endfun
-autocmd FilterWritePre * call SetDiffColors()
+" fun! SetDiffColors()
+"   highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+"   highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+"   highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+"   highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+" endfun
+" autocmd FilterWritePre * call SetDiffColors()
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
@@ -102,7 +102,8 @@ endfunction
 syntax enable
 set background=dark
 colorscheme solarized
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
+let g:solarized_diffmode="high"
 
 " Always highlight column 80 so it's easier to see where
 " cutoff appears on longer screens
