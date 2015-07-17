@@ -28,7 +28,7 @@ let g:mapleader = "\<Space>"
 set tm=2000
 
 " Allow the normal use of "," by pressing it twice
-noremap ,, ,
+" noremap ,, ,
 
 " Use par for prettier line formatting
 set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
@@ -82,7 +82,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'michaeljsmith/vim-indent-object'
 
 " Allow pane movement to jump out of vim into tmux
-Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'christoomey/vim-tmux-navigator'
 
 " Haskell
 Plugin 'raichoo/haskell-vim'
@@ -166,16 +166,16 @@ if &term =~ '256color'
 endif
 
 " Force redraw
-map <silent> <leader>r :redraw!<CR>
+" map <silent> <leader>r :redraw!<CR>
 
 " Turn mouse mode on
-nnoremap <leader>ma :set mouse=a<cr>
+" nnoremap <leader>ma :set mouse=a<cr>
 
 " Turn mouse mode off
-nnoremap <leader>mo :set mouse=<cr>
+" nnoremap <leader>mo :set mouse=<cr>
 
 " Default to mouse mode on
-set mouse=a
+" set mouse=a
 " }}}
 
 " Colors and Fonts {{{
@@ -189,23 +189,23 @@ set mouse=a
 syntax enable
 
 " Adjust signscolumn and syntastic to match wombat
-hi! link SignColumn LineNr
-hi! link SyntasticErrorSign ErrorMsg
-hi! link SyntasticWarningSign WarningMsg
+" hi! link SignColumn LineNr
+" hi! link SyntasticErrorSign ErrorMsg
+" hi! link SyntasticWarningSign WarningMsg
 
 " Use pleasant but very visible search hilighting
-hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
-hi! link Visual Search
+" hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
+" hi! link Visual Search
 
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
 
 " Match wombat colors in nerd tree
-hi Directory guifg=#8ac6f2
+" hi Directory guifg=#8ac6f2
 
 " Searing red very visible cursor
-hi Cursor guibg=red
+" hi Cursor guibg=red
 
 " Use same color behind concealed unicode characters
 hi clear Conceal
@@ -215,12 +215,12 @@ set guicursor=n-v-c:block-Cursor
 set guicursor+=n-v-c:blinkon0
 
 " Set extra options when running in GUI mode
-if has("gui_running")
-  set guioptions-=T
-  set guioptions-=e
-  set guitablabel=%M\ %t
-endif
-set t_Co=256
+" if has("gui_running")
+"   set guioptions-=T
+"   set guioptions-=e
+"   set guitablabel=%M\ %t
+" endif
+" set t_Co=256
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -229,7 +229,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Use large font by default in MacVim
-set gfn=Monaco:h19
+" set gfn=Monaco:h19
 
 " }}}
 
@@ -302,10 +302,10 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 nnoremap j gj
 nnoremap k gk
 
-noremap <c-h> <c-w>h
-noremap <c-k> <c-w>k
-noremap <c-j> <c-w>j
-noremap <c-l> <c-w>l
+" noremap <c-h> <c-w>h
+" noremap <c-k> <c-w>k
+" noremap <c-j> <c-w>j
+" noremap <c-l> <c-w>l
 
 " Disable highlight when <leader><cr> is pressed
 " but preserve cursor coloring
@@ -328,28 +328,28 @@ augroup END
 set viminfo^=%
 
 " Open window splits in various places
-nmap <leader>sh :leftabove  vnew<CR>
-nmap <leader>sl :rightbelow vnew<CR>
-nmap <leader>sk :leftabove  new<CR>
-nmap <leader>sj :rightbelow new<CR>
+" nmap <leader>sh :leftabove  vnew<CR>
+" nmap <leader>sl :rightbelow vnew<CR>
+" nmap <leader>sk :leftabove  new<CR>
+" nmap <leader>sj :rightbelow new<CR>
 
 " Manually create key mappings (to avoid rebinding C-\)
-let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 
 " don't close buffers when you aren't displaying them
 set hidden
 
 " previous buffer, next buffer
-nnoremap <leader>bp :bp<cr>
-nnoremap <leader>bn :bn<cr>
+" nnoremap <leader>bp :bp<cr>
+" nnoremap <leader>bn :bn<cr>
 
 " close every window in current tabview but the current
-nnoremap <leader>bo <c-w>o
+" nnoremap <leader>bo <c-w>o
 " delete buffer without closing pane
 " noremap <leader>bd :Bd<cr>
 
