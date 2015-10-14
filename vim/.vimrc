@@ -1,5 +1,19 @@
 " General {{{
 
+" Don't show intro
+set shortmess+=I
+
+" This option will force vim to source .vimrc files that are stored in working directory
+" and enables project specific settings. OBS See set secure in this file!
+set exrc
+
+" Since vimrc will source .vimrc from any folder it it started from this is a security 
+" threat.
+" This will limit what command as allowed to execute in non default vimrc files
+" commands that writes to files of execute shellcommands are not allowed and map commands 
+" are shown.
+set secure
+
 " use indentation for folds
 set foldmethod=indent
 set foldnestmax=5
@@ -27,21 +41,19 @@ let g:mapleader = "\<Space>"
 " Leader key timeout
 set tm=2000
 
-" Allow the normal use of "," by pressing it twice
-" noremap ,, ,
-
 " Use par for prettier line formatting
-set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
-
-" Use stylish haskell instead of par for haskell buffers
-autocmd FileType haskell let &formatprg="stylish-haskell"
-
-" Find custom built ghc-mod, codex etc
-let $PATH = $PATH . ':' . expand("~/.haskell-vim-now/bin")
+" set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
 
 " Kill the damned Ex mode.
 nnoremap Q <nop>
 
+set clipboard=unnamed
+
+" Use ii in insert mode to enter normal mode
+inorema ii <Esc>
+
+" Save file
+nnoremap <Leader>w :w<CR>
 " }}}
 
 " Vundle {{{
@@ -56,17 +68,11 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Support bundles
-Plugin 'jgdavey/tslime.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
-Plugin 'moll/vim-bbye'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-scripts/gitignore'
-
-" Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'int3/vim-extradite'
+Plugin 'mileszs/ack.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets' "Snippets used by ultisnip
 
   " Bars, panels, and files
 Plugin 'scrooloose/nerdtree'
@@ -74,30 +80,23 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 
+" Git
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mattn/webapi-vim' "Required by gist
+Plugin 'mattn/gist-vim'
+
 " Text manipulation
-Plugin 'vim-scripts/Align'
 Plugin 'vim-scripts/Gundo'
 Plugin 'tpope/vim-commentary'
-Plugin 'godlygeek/tabular'
-Plugin 'michaeljsmith/vim-indent-object'
 
-" Allow pane movement to jump out of vim into tmux
-" Plugin 'christoomey/vim-tmux-navigator'
+" Colors and layout
+Plugin 'altercation/vim-colors-solarized'
 
-" Haskell
-Plugin 'raichoo/haskell-vim'
-" Plugin 'enomsg/vim-haskellConcealPlus'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
-Plugin 'Twinside/vim-hoogle'
-
-" Colorscheme
-" Plugin 'vim-scripts/wombat256.vim'
-
-" Custom bundles
-if filereadable(expand("~/.vim.local/bundles.vim"))
-  source ~/.vim.local/bundles.vim
-endif
+" " Custom bundles
+" " Nice to use if i want to source other bundles
+" if filereadable(expand("~/.vim.local/bundles.vim"))
+"   source ~/.vim.local/bundles.vim
+" endif
 
 call vundle#end()
 
@@ -105,17 +104,20 @@ call vundle#end()
 
 " VIM user interface {{{
 
+" Better splits (new windows appear below and to the right)
+set splitbelow
+set splitright
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Turn on the WiLd menu
-set wildmenu
-" Tab-complete files up to longest unambiguous prefix
-set wildmode=list:longest,full
-
 " Always show current position
-set ruler
-set number
+" set ruler
+" set number
+set relativenumber
+" Highlight the current line
+set cursorline
+
 
 " Show trailing whitespace
 set list
@@ -165,47 +167,21 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-" Force redraw
-" map <silent> <leader>r :redraw!<CR>
-
-" Turn mouse mode on
-" nnoremap <leader>ma :set mouse=a<cr>
-
-" Turn mouse mode off
-" nnoremap <leader>mo :set mouse=<cr>
-
-" Default to mouse mode on
-" set mouse=a
 " }}}
 
 " Colors and Fonts {{{
 
-" try
-"   colorscheme wombat256mod
-" catch
-" endtry
-
 " Enable syntax highlighting
 syntax enable
-
-" Adjust signscolumn and syntastic to match wombat
-" hi! link SignColumn LineNr
-" hi! link SyntasticErrorSign ErrorMsg
-" hi! link SyntasticWarningSign WarningMsg
-
-" Use pleasant but very visible search hilighting
-" hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
-" hi! link Visual Search
+"
+" For solarized color scheme
+set background=dark
+colorscheme solarized
+let g:solarized_diffmode="high"
 
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
-
-" Match wombat colors in nerd tree
-" hi Directory guifg=#8ac6f2
-
-" Searing red very visible cursor
-" hi Cursor guibg=red
 
 " Use same color behind concealed unicode characters
 hi clear Conceal
@@ -214,22 +190,11 @@ hi clear Conceal
 set guicursor=n-v-c:block-Cursor
 set guicursor+=n-v-c:blinkon0
 
-" Set extra options when running in GUI mode
-" if has("gui_running")
-"   set guioptions-=T
-"   set guioptions-=e
-"   set guitablabel=%M\ %t
-" endif
-" set t_Co=256
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-
-" Use large font by default in MacVim
-" set gfn=Monaco:h19
 
 " }}}
 
@@ -280,20 +245,6 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-" Pretty unicode haskell symbols
-"let g:haskell_conceal_wide = 1
-"let g:haskell_conceal_enumerations = 1
-"let hscoptions="𝐒𝐓𝐄𝐌xRtB𝔻"
-
-" }}}
-
-" Visual mode related {{{
-
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
-
 " }}}
 
 " Moving around, tabs, windows and buffers {{{
@@ -302,19 +253,9 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 nnoremap j gj
 nnoremap k gk
 
-" noremap <c-h> <c-w>h
-" noremap <c-k> <c-w>k
-" noremap <c-j> <c-w>j
-" noremap <c-l> <c-w>l
-
 " Disable highlight when <leader><cr> is pressed
 " but preserve cursor coloring
 nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
-augroup haskell
-  autocmd!
-  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
 
 " Return to last edit position when opening files (You want this!)
 augroup last_edit
@@ -324,37 +265,12 @@ augroup last_edit
        \   exe "normal! g`\"" |
        \ endif
 augroup END
+
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Open window splits in various places
-" nmap <leader>sh :leftabove  vnew<CR>
-" nmap <leader>sl :rightbelow vnew<CR>
-" nmap <leader>sk :leftabove  new<CR>
-" nmap <leader>sj :rightbelow new<CR>
-
-" Manually create key mappings (to avoid rebinding C-\)
-" let g:tmux_navigator_no_mappings = 1
-
-" nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-
 " don't close buffers when you aren't displaying them
 set hidden
-
-" previous buffer, next buffer
-" nnoremap <leader>bp :bp<cr>
-" nnoremap <leader>bn :bn<cr>
-
-" close every window in current tabview but the current
-" nnoremap <leader>bo <c-w>o
-" delete buffer without closing pane
-" noremap <leader>bd :Bd<cr>
-
-" fuzzy find buffers
-" noremap <leader>b<space> :CtrlPBuffer<cr>
 
 " }}}
 
@@ -362,6 +278,10 @@ set hidden
 
 " Always show the status line
 set laststatus=2
+
+" Don't show seperators for airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " }}}
 
@@ -390,40 +310,21 @@ map <leader>ss :setlocal spell!<cr>
 
 " Helper functions {{{
 
-function! CmdLine(str)
-  exe "menu Foo.Bar :" . a:str
-  emenu Foo.Bar
-  unmenu Foo
-endfunction 
-
-function! VisualSelection(direction, extra_filter) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-
-  let l:pattern = escape(@", '\\/.*$^~[]')
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-  if a:direction == 'b'
-    execute "normal ?" . l:pattern . "^M"
-  elseif a:direction == 'gv'
-    call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.' . a:extra_filter)
-  elseif a:direction == 'replace'
-    call CmdLine("%s" . '/'. l:pattern . '/')
-  elseif a:direction == 'f'
-    execute "normal /" . l:pattern . "^M"
-  endif
-
-  let @/ = l:pattern
-  let @" = l:saved_reg
+" Opens a scratch pad when I type :Shell with the output in a vim buffer
+function! s:ExecuteInShell(command)
+  let command = join(map(split(a:command), 'expand(v:val)'))
+  let winnr = bufwinnr('^' . command . '$')
+  silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
+  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
+  echo 'Execute ' . command . '...'
+  silent! execute 'silent %!'. command
+  silent! execute 'resize ' . line('$')
+  silent! redraw
+  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
+  echo 'Shell command ' . command . ' executed.'
 endfunction
-
-" }}}
-
-" Slime {{{
-
-vmap <silent> <Leader>rs <Plug>SendSelectionToTmux
-nmap <silent> <Leader>rs <Plug>NormalModeSendToTmux
-nmap <silent> <Leader>rv <Plug>SetTmuxVars
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 " }}}
 
@@ -450,185 +351,71 @@ nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
 
 " }}}
 
-" Alignment {{{
-
-" Stop Align plugin from forcing its mappings on us
-let g:loaded_AlignMapsPlugin=1
-" Align on equal signs
-map <Leader>a= :Align =<CR>
-" Align on commas
-map <Leader>a, :Align ,<CR>
-" Align on pipes
-map <Leader>a<bar> :Align <bar><CR>
-" Prompt for align character
-map <leader>ap :Align
-
-" Enable some tabular presets for Haskell
-let g:haskell_tabular = 1
-
-" }}}
-
 " Tags {{{
 
-set tags=tags;/,codex.tags;/
-
-let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
-    \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
-    \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
-\ }
-
-" Generate haskell tags with codex and hscope
-map <leader>tg :!codex update --force<CR>:call system("git hscope -X TemplateHaskell")<CR><CR>:call LoadHscope()<CR>
-
-map <leader>tt :TagbarToggle<CR>
-
-set csprg=~/.haskell-vim-now/bin/hscope
-set csto=1 " search codex tags first
-set cst
-set csverb
-nnoremap <silent> <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
-" Automatically make cscope connections
-function! LoadHscope()
-  let db = findfile("hscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/hscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  endif
-endfunction
-au BufEnter /*.hs call LoadHscope()
+" Autofocus tagbar when expanded
+let g:tagbar_autofocus = 1
 
 " }}}
 
-" Git {{{
+" Git/Gist {{{
 
-let g:extradite_width = 60
-" Hide messy Ggrep output and copen automatically
-function! NonintrusiveGitGrep(term)
-  execute "copen"
-  " Map 't' to open selected item in new tab
-  execute "nnoremap <silent> <buffer> t <C-W><CR><C-W>T"
-  execute "silent! Ggrep " . a:term
-  execute "redraw!"
-endfunction
+" Gist authorisation settings
+let g:github_user = $GITHUB_USER
+let g:github_token = $GITHUB_TOKEN
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
 
-command! -nargs=1 GGrep call NonintrusiveGitGrep(<q-args>)
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gg :copen<CR>:GGrep 
-nmap <leader>gl :Extradite<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gb :Gblame<CR>
-
-function! CommittedFiles()
-  " Clear quickfix list
-  let qf_list = []
-  " Find files committed in HEAD
-  let git_output = system("git diff-tree --no-commit-id --name-only -r HEAD\n")
-  for committed_file in split(git_output, "\n")
-    let qf_item = {'filename': committed_file}
-    call add(qf_list, qf_item)
-  endfor
-  " Fill quickfix list with them
-  call setqflist(qf_list, '')
-endfunction
-
-" Show list of last-committed files
-nnoremap <silent> <leader>g? :call CommittedFiles()<CR>:copen<CR>
+" Bind key to open git blame for active file +- 5 rows of current file
+noremap <leader>b :execute "Shell git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
 
 " }}}
 
-" Haskell Interrogation {{{
+" YCM {{{
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+" }}}
 
-set completeopt+=longest
+" Ctrlp {{{
 
-" Use buffer words as default tab completion
-let g:SuperTabDefaultCompletionType = '<c-x><c-p>'
+" fuzzy find buffers
+noremap <leader><leader> :CtrlPBuffer<cr>
 
-" But provide (neco-ghc) omnicompletion
-if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
+" Open new file
+nnoremap <Leader>o :CtrlP<CR>
+
+" Faster search
+let g:ctrlp_use_caching = 0
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+   let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+       \ }
 endif
-
-" Show types in completion suggestions
-let g:necoghc_enable_detailed_browse = 1
-
-" Type of expression under cursor
-nmap <silent> <leader>ht :GhcModType<CR>
-" Insert type of expression under cursor
-nmap <silent> <leader>hT :GhcModTypeInsert<CR>
-" GHC errors and warnings
-nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
-" Haskell Lint
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
-
-" Hoogle the word under the cursor
-nnoremap <silent> <leader>hh :Hoogle<CR>
-
-" Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle 
-
-" Hoogle for detailed documentation (e.g. "Functor")
-nnoremap <silent> <leader>hi :HoogleInfo<CR>
-
-" Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo 
-
-" Hoogle, close the Hoogle window
-nnoremap <silent> <leader>hz :HoogleClose<CR>
-
 " }}}
 
-" Conversion {{{
+" Gundo settings {{{
 
-function! Pointfree()
-  call setline('.', split(system('pointfree '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h. :call Pointfree()<CR>
-
-function! Pointful()
-  call setline('.', split(system('pointful '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h> :call Pointful()<CR>
-
+let g:gundo_close_on_revert = 1
+let g:gundo_preview_bottom = 1
+" make gundo persistence in case of crash
+set undodir=~/.vim/tmp/undo//
+set undofile
+set history=100
+set undolevels=100
+"
 " }}}
 
 " Customization {{{
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+" " Nice way to source external vimrc into this
+" if filereadable(expand("~/.vimrc.local"))
+"   source ~/.vimrc.local
+" endif
 
 " }}}

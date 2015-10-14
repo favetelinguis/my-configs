@@ -1,0 +1,25 @@
+#!/bin/zsh
+# source ./lib/zsh/funcs
+#Extract command line options with getopt
+# set -- $(getopt -q vtx "$@")
+# echo $*
+
+function help {
+  echo "All the help items are displayed!"
+  echo $0
+}
+
+while getopts :vtxah opt
+do
+  case "$opt" in
+    v) echo Installing vim ;;
+    t) echo Installing tmux ;;
+    x) echo Installing xmonad ;;
+    h) help=$(help)
+       echo $help ;;
+    a) echo All avaliable to install;;
+    *) echo "$opt is not an option" >&2 ;;
+  esac
+done
+
+trap "echo The install has exited" EXIT
