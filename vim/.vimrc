@@ -1,8 +1,5 @@
 " General {{{
 
-" Don't show intro
-set shortmess+=I
-
 " This option will force vim to source .vimrc files that are stored in working directory
 " and enables project specific settings. OBS See set secure in this file!
 set exrc
@@ -54,6 +51,7 @@ inorema ii <Esc>
 
 " Save file
 nnoremap <Leader>w :w<CR>
+
 " }}}
 
 " Vundle {{{
@@ -78,9 +76,13 @@ Plugin 'honza/vim-snippets' "Snippets used by ultisnip
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
+Plugin 'xolox/vim-misc' " Required by easytags
+Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
 
 " Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'int3/vim-extradite'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/webapi-vim' "Required by gist
 Plugin 'mattn/gist-vim'
@@ -104,6 +106,9 @@ call vundle#end()
 
 " VIM user interface {{{
 
+" Disable VIM welcomescreen
+set shortmess+=I
+
 " Better splits (new windows appear below and to the right)
 set splitbelow
 set splitright
@@ -113,7 +118,7 @@ set so=7
 
 " Always show current position
 " set ruler
-" set number
+set number
 set relativenumber
 " Highlight the current line
 set cursorline
@@ -310,22 +315,6 @@ map <leader>ss :setlocal spell!<cr>
 
 " Helper functions {{{
 
-" Opens a scratch pad when I type :Shell with the output in a vim buffer
-function! s:ExecuteInShell(command)
-  let command = join(map(split(a:command), 'expand(v:val)'))
-  let winnr = bufwinnr('^' . command . '$')
-  silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
-  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
-  echo 'Execute ' . command . '...'
-  silent! execute 'silent %!'. command
-  silent! execute 'resize ' . line('$')
-  silent! redraw
-  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
-  echo 'Shell command ' . command . ' executed.'
-endfunction
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-
 " }}}
 
 " NERDTree {{{
@@ -356,6 +345,11 @@ nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
 " Autofocus tagbar when expanded
 let g:tagbar_autofocus = 1
 
+"Use F8 for toggle tabbar
+nmap <leader>y :TagbarToggle<CR>
+
+" Add my custom comand to run first time in a c project to generate tags for c and h files
+:command InitCTags UpdateTags **/*.[hc]
 " }}}
 
 " Git/Gist {{{
@@ -365,9 +359,6 @@ let g:github_user = $GITHUB_USER
 let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
-
-" Bind key to open git blame for active file +- 5 rows of current file
-noremap <leader>b :execute "Shell git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
 
 " }}}
 
@@ -381,6 +372,9 @@ let g:ycm_key_list_previous_completion=[]
 
 " fuzzy find buffers
 noremap <leader><leader> :CtrlPBuffer<cr>
+
+" Fuzzy tags finder
+nnoremap <leader>t :CtrlPTag<CR>
 
 " Open new file
 nnoremap <Leader>o :CtrlP<CR>
