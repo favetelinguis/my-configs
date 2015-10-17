@@ -106,6 +106,12 @@ call vundle#end()
 
 " VIM user interface {{{
 
+" Used for a nicer completion of the command mode
+" Turn on the WiLd menu
+set wildmenu
+" Tab-complete files up to longest unambiguous prefix
+set wildmode=list:longest,full
+
 " Disable VIM welcomescreen
 set shortmess+=I
 
@@ -349,7 +355,7 @@ let g:tagbar_autofocus = 1
 nmap <leader>y :TagbarToggle<CR>
 
 " Add my custom comand to run first time in a c project to generate tags for c and h files
-:command InitCTags UpdateTags **/*.[hc]
+command InitCTags UpdateTags **/*.[hc]
 " }}}
 
 " Git/Gist {{{
