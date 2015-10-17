@@ -90,6 +90,7 @@ Plugin 'mattn/gist-vim'
 " Text manipulation
 Plugin 'vim-scripts/Gundo'
 Plugin 'tpope/vim-commentary'
+Plugin 'vasconcelloslf/vim-interestingwords' " Highlight words
 
 " Colors and layout
 Plugin 'altercation/vim-colors-solarized'
@@ -282,6 +283,9 @@ set viminfo^=%
 
 " don't close buffers when you aren't displaying them
 set hidden
+
+"Always show the status line
+set laststatus=2
 
 " }}}
 
