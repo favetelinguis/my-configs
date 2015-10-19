@@ -11,19 +11,6 @@ set exrc
 " are shown.
 set secure
 
-" use indentation for folds
-set foldmethod=indent
-set foldnestmax=5
-set foldlevelstart=99
-set foldcolumn=0
-
-augroup vimrcFold
-  " fold vimrc itself by categories
-  autocmd!
-  autocmd FileType vim set foldmethod=marker
-  autocmd FileType vim set foldlevel=0
-augroup END
-
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -41,16 +28,9 @@ set tm=2000
 " Use par for prettier line formatting
 " set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
 
-" Kill the damned Ex mode.
-nnoremap Q <nop>
-
-set clipboard=unnamed
-
 " Use ii in insert mode to enter normal mode
 inorema ii <Esc>
 
-" Save file
-nnoremap <Leader>w :w<CR>
 
 " }}}
 
@@ -65,30 +45,20 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 
-" Support bundles
-Plugin 'vim-scripts/gitignore'
-Plugin 'mileszs/ack.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets' "Snippets used by ultisnip
-
   " Bars, panels, and files
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
-Plugin 'xolox/vim-misc' " Required by easytags
-Plugin 'xolox/vim-easytags'
-Plugin 'majutsushi/tagbar'
 
-" Git
+" Requires Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'int3/vim-extradite'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/webapi-vim' "Required by gist
 Plugin 'mattn/gist-vim'
+Plugin 'vim-scripts/gitignore'
 
 " Text manipulation
-Plugin 'vim-scripts/Gundo'
 Plugin 'tpope/vim-commentary'
 Plugin 'vasconcelloslf/vim-interestingwords' " Highlight words
 
@@ -96,16 +66,18 @@ Plugin 'vasconcelloslf/vim-interestingwords' " Highlight words
 Plugin 'altercation/vim-colors-solarized'
 
 " " Custom bundles
-" " Nice to use if i want to source other bundles
-" if filereadable(expand("~/.vim.local/bundles.vim"))
-"   source ~/.vim.local/bundles.vim
-" endif
+if filereadable(expand("~/.vim.local/bundles.vim"))
+  source ~/.vim.local/bundles.vim
+endif
 
 call vundle#end()
 
 " }}}
 
 " VIM user interface {{{
+
+" Kill the damned Ex mode.
+nnoremap Q <nop>
 
 " Used for a nicer completion of the command mode
 " Turn on the WiLd menu
@@ -121,7 +93,7 @@ set splitbelow
 set splitright
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" set so=7
 
 " Always show current position
 " set ruler
@@ -129,7 +101,6 @@ set number
 set relativenumber
 " Highlight the current line
 set cursorline
-
 
 " Show trailing whitespace
 set list
@@ -217,23 +188,6 @@ set nobackup
 set nowb
 set noswapfile
 
-" Source the vimrc file after saving it
-augroup sourcing
-  autocmd!
-  autocmd bufwritepost .vimrc source $MYVIMRC
-augroup END
-
-" Open file prompt with current path
-" nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
-
-" Show undo tree
-nmap <silent> <leader>u :GundoToggle<CR>
-
-" Fuzzy find files
-nnoremap <silent> <Leader><space> :CtrlP<CR>
-let g:ctrlp_max_files=0
-let g:ctrlp_show_hidden=1
-let g:ctrlp_custom_ignore = { 'dir': '\v[\/](.git)$' }
 
 " }}}
 
@@ -246,8 +200,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -265,9 +219,6 @@ set wrap "Wrap lines
 nnoremap j gj
 nnoremap k gk
 
-" Disable highlight when <leader><cr> is pressed
-" but preserve cursor coloring
-nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
 
 " Return to last edit position when opening files (You want this!)
 augroup last_edit
@@ -291,9 +242,6 @@ set laststatus=2
 
 " Status line {{{
 
-" Always show the status line
-set laststatus=2
-
 " Don't show seperators for airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -316,15 +264,30 @@ augroup END
 
 " }}}
 
-" Spell checking {{{
+" Leader bindings {{{
+" Leader k highlight word interesting word plugin
+" Leader K unhighlight all words interesting word plugin
+" Leader ?? git gutter to see change
+" If nerd tree is closed, find current file, if open, close it
+nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
+nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
-" }}}
+" Fuzzy find files
+nnoremap <silent> <Leader><space> :CtrlP<CR>
 
-" Helper functions {{{
+" Open new file
+nnoremap <Leader>o :CtrlP<CR>
 
+" Save file
+nnoremap <Leader>w :w<CR>
+
+
+" Disable highlight when <leader><cr> is pressed
+" but preserve cursor coloring
+nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
 " }}}
 
 " NERDTree {{{
@@ -343,24 +306,8 @@ function! ToggleFindNerd()
     exec ':NERDTreeFind'
   endif
 endfunction
-
-" If nerd tree is closed, find current file, if open, close it
-nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
-nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
-
 " }}}
 
-" Tags {{{
-
-" Autofocus tagbar when expanded
-let g:tagbar_autofocus = 1
-
-"Use F8 for toggle tabbar
-nmap <leader>y :TagbarToggle<CR>
-
-" Add my custom comand to run first time in a c project to generate tags for c and h files
-command InitCTags UpdateTags **/*.[hc]
-" }}}
 
 " Git/Gist {{{
 
@@ -372,22 +319,11 @@ let g:gist_open_browser_after_post = 1
 
 " }}}
 
-" YCM {{{
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-" }}}
-
 " Ctrlp {{{
 
-" fuzzy find buffers
-noremap <leader><leader> :CtrlPBuffer<cr>
-
-" Fuzzy tags finder
-nnoremap <leader>t :CtrlPTag<CR>
-
-" Open new file
-nnoremap <Leader>o :CtrlP<CR>
+let g:ctrlp_max_files=0
+let g:ctrlp_show_hidden=1
+let g:ctrlp_custom_ignore = { 'dir': '\v[\/](.git)$' }
 
 " Faster search
 let g:ctrlp_use_caching = 0
@@ -403,23 +339,11 @@ else
 endif
 " }}}
 
-" Gundo settings {{{
-
-let g:gundo_close_on_revert = 1
-let g:gundo_preview_bottom = 1
-" make gundo persistence in case of crash
-set undodir=~/.vim/tmp/undo//
-set undofile
-set history=100
-set undolevels=100
-"
-" }}}
 
 " Customization {{{
 
-" " Nice way to source external vimrc into this
-" if filereadable(expand("~/.vimrc.local"))
-"   source ~/.vimrc.local
-" endif
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
 
 " }}}

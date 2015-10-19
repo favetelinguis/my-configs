@@ -196,9 +196,11 @@ statusbar = {
     topic_empty = " Irssi v$J - http://www.irssi.org";
 
     # all of these treated specially, they're only displayed when needed
-    lag = "{sb Lag: $0-}";
+    lag = "{sb Lag: %m$0-%n}";
     act = "{sb Act: $0-}";
-    more = "-- more --";
+    more = "%k%3-- more --%n";
+
+    #Solarized
   };
 
   # there's two type of statusbars. root statusbars are either at the top
@@ -281,9 +283,64 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "Henrik Larsson";
-    user_name = "henke";
-    nick = "henke";
+    real_name = "Jon Johnsson";
+    user_name = "favetelinguis";
+    nick = "favetelinguis";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    #Solarized
+    theme = "solarized-universal";
+    hilight_color = "= %R";
+  };
+  "perl/core/scripts" = {
+    # Solarized for trackbar.pl
+    trackbar_style = "%B";
+  };
+};
+ignores = (
+  {
+    level = "CRAP MSGS NOTICES SNOTES CTCPS JOINS PARTS QUITS KICKS MODES TOPICS WALLOPS INVITES NICKS DCC DCCMSGS CLIENTNOTICES CLIENTCRAP CLIENTERRORS HILIGHTS";
+  }
+);
+hilights = (
+  { text = "favetelinguis"; color = "%M"; nick = "yes"; word = "yes"; }
+);
+windows = {
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#haskell";
+        tag = "Freenode";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#archlinux-unregistered";
+        tag = "Freenode";
+      }
+    );
+  };
+  4 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#vim";
+        tag = "Freenode";
+      }
+    );
+  };
+  5 = { name = "hilight"; sticky = "yes"; };
+};
+mainwindows = {
+  2 = { first_line = "10"; lines = "46"; };
+  5 = { first_line = "1"; lines = "9"; };
 };

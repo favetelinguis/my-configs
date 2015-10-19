@@ -1,0 +1,34 @@
+" YCM {{{
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+" }}}
+" Gundo settings {{{
+
+let g:gundo_close_on_revert = 1
+let g:gundo_preview_bottom = 1
+" make gundo persistence in case of crash
+set undodir=~/.vim/tmp/undo//
+set undofile
+set history=100
+set undolevels=100
+
+" Show undo tree
+nmap <silent> <leader>u :GundoToggle<CR>
+" }}}
+" Tags {{{
+
+"Use F8 for toggle tabbar
+nmap <leader>y :TagbarToggle<CR>
+
+" Fuzzy find buffers
+noremap <leader><leader> :CtrlPBuffer<cr>
+" Fuzzy tags finder
+nnoremap <leader>t :CtrlPTag<CR>
+" Autofocus tagbar when expanded
+let g:tagbar_autofocus = 1
+
+
+" Add my custom comand to run first time in a c project to generate tags for c and h files
+command InitCTags UpdateTags **/*.[hc]
+" }}}
