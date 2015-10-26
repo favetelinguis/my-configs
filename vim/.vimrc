@@ -1,39 +1,3 @@
-" General {{{
-
-" This option will force vim to source .vimrc files that are stored in working directory
-" and enables project specific settings. OBS See set secure in this file!
-set exrc
-
-" Since vimrc will source .vimrc from any folder it it started from this is a security 
-" threat.
-" This will limit what command as allowed to execute in non default vimrc files
-" commands that writes to files of execute shellcommands are not allowed and map commands 
-" are shown.
-set secure
-
-" Sets how many lines of history VIM has to remember
-set history=700
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = "\<Space>"
-let g:mapleader = "\<Space>"
-
-" Leader key timeout
-set tm=2000
-
-" Use par for prettier line formatting
-" set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
-
-" Use ii in insert mode to enter normal mode
-inorema ii <Esc>
-
-
-" }}}
-
 " Vundle {{{
 
 set nocompatible
@@ -69,9 +33,46 @@ Plugin 'altercation/vim-colors-solarized'
 if filereadable(expand("~/.vim.local/bundles.vim"))
   source ~/.vim.local/bundles.vim
 endif
+if filereadable(expand("~/.vim.local/clojure.vim"))
+  source ~/.vim.local/clojure.vim
+endif
 
 call vundle#end()
 
+" }}}
+
+" General {{{
+
+" This option will force vim to source .vimrc files that are stored in working directory
+" and enables project specific settings. OBS See set secure in this file!
+set exrc
+
+" Since vimrc will source .vimrc from any folder it it started from this is a security 
+" threat.
+" This will limit what command as allowed to execute in non default vimrc files
+" commands that writes to files of execute shellcommands are not allowed and map commands 
+" are shown.
+set secure
+
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+
+" Leader key timeout
+set tm=2000
+
+" Use par for prettier line formatting
+" set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
+
+" Use ii in insert mode to enter normal mode
+inorema ii <Esc>
 " }}}
 
 " VIM user interface {{{
@@ -344,6 +345,9 @@ endif
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
+endif
+if filereadable(expand("~/.vimrc.clojure"))
+  source ~/.vimrc.clojure
 endif
 
 " }}}
