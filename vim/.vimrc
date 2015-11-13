@@ -73,6 +73,12 @@ set tm=2000
 
 " Use ii in insert mode to enter normal mode
 inorema ii <Esc>
+
+" Mappings for navigating the buffer list
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :first<CR>
+nnoremap <silent> [B :blast<CR>
 " }}}
 
 " VIM user interface {{{
@@ -233,7 +239,8 @@ augroup END
 " Remember info about open buffers on close
 set viminfo^=%
 
-" don't close buffers when you aren't displaying them
+"I can use bnext etc on buffers that are edited
+"vim sets them as autohidden
 set hidden
 
 "Always show the status line
