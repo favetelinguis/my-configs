@@ -46,11 +46,41 @@
     ;; https://github.com/clojure-emacs/cider
     cider
 
+    ;; autocompletions
+    company
+
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
     ;; of ido
     ido-ubiquitous
 
+    ;; display ido in vertical mode
+    ido-vertical-mode
+
+    ;; shows avaliable keys for set prefixes
+    guide-key
+
+    ;; undo-tree is required for evil mode
+    undo-tree
+
+    ;; evil mode to emulate vim
+    evil
+    
+    ;; easy way to comment text with gcc
+    evil-commentary
+    
+    ;; port of vim surround
+    evil-surround
+    
+    ;; needed not for evil-surround to fuck up paredits surroundings
+    evil-paredit
+
+    ;; use % to jump between matching tags
+    evil-matchit
+    
+    ;; Sets relative line numbers
+    linum-relative
+        
     ;; Enhances M-x to allow easier execution of commands. Provides
     ;; a filterable list of possible commands in the minibuffer
     ;; http://www.emacswiki.org/emacs/Smex
@@ -120,6 +150,7 @@
 
 ;; These customizations make editing a bit nicer.
 (load "editing.el")
+(load "init-evil.el")
 
 ;; Hard-to-categorize customizations
 (load "misc.el")
@@ -130,3 +161,4 @@
 ;; Langauage-specific
 (load "setup-clojure.el")
 (load "setup-js.el")
+(load "setup-prolog.el")

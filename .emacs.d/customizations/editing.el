@@ -18,6 +18,11 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
+;; Enables autocompletion on everywhere
+(global-company-mode)
+;; Trigger completion with tab
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+
 ;; Interactive search key bindings. By default, C-s runs
 ;; isearch-forward, so this swaps the bindings.
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)

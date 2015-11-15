@@ -49,6 +49,17 @@
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; Specify the preference order of files shown in thr minibuffer
+(setq ido-file-extensions-order '(".clj" ".pl" ".py" ".emacs" ".el" ".sh"))
+
+;; Setup vertical mode for ido
+(require 'ido-vertical-mode)
+(ido-mode 1)
+(ido-vertical-mode 1)
+
+;; rebind keys keys for navigating vertical ido 
+;; C-p - ido-toggle-prefix - will now be available on C-c C-t
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
 ;; Enhances M-x to allow easier execution of commands. Provides
 ;; a filterable list of possible commands in the minibuffer
@@ -59,3 +70,26 @@
 
 ;; projectile everywhere!
 (projectile-global-mode)
+
+;; A minimalistic interface to ack
+(defvar ack-history nil
+  "History for the `ack' command.")
+
+(defun ack (command-args)
+  (interactive
+   (let ((ack-command "ack --nofilter --nogroup --with-filename "))
+     (list (read-shell-command "Run ack (enter search): "
+                               ack-command
+                               'ack-history))))
+  (let ((compilation-disable-input t))
+    (compilation-start (concat command-args " < " null-device)
+                       'grep-mode)))
+
+;; Add what prefixes I want to use guide-key fore
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-c" "C-c p"))
+(guide-key-mode 1)
+
+;; Enable relative linumbers for better navigaton in evil mode
+(require 'linum-relative)
+(linum-relative-on)
