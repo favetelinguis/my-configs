@@ -37,6 +37,9 @@
     
     ;; Support for Racket, Guile, Chicken
     geiser
+    
+    ;; Better flex matcher for ido mode
+    flx-ido
 
     ;; key bindings and code colorization for Clojure
     ;; https://github.com/clojure-emacs/clojure-mode
