@@ -72,7 +72,7 @@ set tm=2000
 " set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
 
 " Use ii in insert mode to enter normal mode
-inorema ii <Esc>
+inorema jk <Esc>
 
 " Mappings for navigating the buffer list
 nnoremap <silent> [b :bprevious<CR>
