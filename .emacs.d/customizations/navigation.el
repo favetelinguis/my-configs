@@ -87,7 +87,7 @@
 
 ;; Add what prefixes I want to use guide-key fore
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-c" "C-c p"))
+(setq guide-key/guide-key-sequence '("C-x" "C-c" "C-c p"))
 (guide-key-mode 1)
 
 ;; Enable relative linumbers for better navigaton in evil mode
