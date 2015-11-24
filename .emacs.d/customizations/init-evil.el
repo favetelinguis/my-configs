@@ -9,7 +9,6 @@
     text-mode
     prog-mode
     sws-mode
-    haskell-mode
     yaml-mode
     vimrc-mode
     dired-mode

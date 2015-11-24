@@ -101,9 +101,9 @@
     ;; edit html tags like sexps
     tagedit
     
-    ;; haskell support
-    haskell-mode
-
+    ;; major mode for editing markdown files
+    markdown-mode
+    
     ;; git integration
     magit))
 
@@ -171,4 +171,4 @@
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "setup-prolog.el")
-(load "setup-haskell.el")
+(load "setup-markdown.el")
