@@ -184,4 +184,11 @@
 
 ;(provide 'init-evil)
 
+;; Function to remove keybindings from evil that collides with other keys
+(defun evil-undefine ()
+ (interactive)
+ (let (evil-mode-map-alist)
+   (call-interactively (key-binding (this-command-keys)))))
 
+;; Importatnt in cider mode but blocked by evil mode
+(define-key evil-normal-state-map (kbd "M-.") 'evil-undefine)
