@@ -2,3 +2,4 @@
 .xmonad/xmonad.hi
 .xmonad/xmonad.o
 .emacs.d/elpa/*
+*.dat

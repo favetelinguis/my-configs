@@ -53,3 +53,22 @@
 (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode))
+
+;; start figwheel repl from inside Cider Repl
+;; obs use this command form cider repl
+;; requires lots of setup in lein
+;; see figwheel wiki
+(defun cider-figwheel-repl ()
+  (interactive)
+  (save-some-buffers)
+  (with-current-buffer (cider-current-repl-buffer)
+    (goto-char (point-max))
+    (insert "(require 'figwheel-sidecar.repl-api)
+             (figwheel-sidecar.repl-api/start-figwheel!) ; idempotent
+             (figwheel-sidecar.repl-api/cljs-repl)")
+    (cider-repl-return)))
+(global-set-key (kbd "C-c C-f") #'cider-figwheel-repl)
+
+;;Defines indentation ruels for om/defui
+(put-clojure-indent 'defui '(2 nil nil (1)))
+

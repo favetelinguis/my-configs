@@ -8,12 +8,12 @@
 ;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 ; (add-to-list 'package-archives
 ;              '("tromey" . "http://tromey.com/elpa/") t)
-; (add-to-list 'package-archives
-;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa-stable.milkbox.net/packages/")))
+; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+;                          ("marmalade" . "http://marmalade-repo.org/packages/")
+;                          ("melpa" . "http://melpa-stable.milkbox.net/packages/")))
 
 
 ;; Load and activate emacs packages. Do this first so that the
@@ -31,16 +31,13 @@
 ;; manually with M-x package-install
 ;; Add in your own as you wish:
 (defvar my-packages
-  '(;; makes handling lisp expressions much, much easier
+  '(
+
+    ;; CLOJURE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; makes handling lisp expressions much, much easier
     ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
     paredit
     
-    ;; Support for Racket, Guile, Chicken
-    geiser
-    
-    ;; Better flex matcher for ido mode
-    flx-ido
-
     ;; key bindings and code colorization for Clojure
     ;; https://github.com/clojure-emacs/clojure-mode
     clojure-mode
@@ -53,8 +50,39 @@
     cider
 
     ;; autocompletions
-    company
-
+    ;; active for lisp and clojure mode
+    ;; company ;; try autocomplete for some time
+    
+    ;; colorful parenthesis matching
+    rainbow-delimiters
+    
+    ;; Javascript and web;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; edit html tags like sexps
+    ;; tagedit
+    
+    ;;javascript mode
+    auto-complete
+    yasnippet
+    flycheck
+    
+    js2-mode
+    ac-js2
+    js2-refactor
+    react-snippets
+    web-beautify
+    tern
+    tern-auto-complete
+    
+    web-mode
+    emmet-mode
+    ac-emmet
+    
+    
+    ;; major mode for editing markdown files
+    markdown-mode
+    json-mode
+    
+    ;; Base setup ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
     ;; of ido
@@ -62,6 +90,9 @@
 
     ;; display ido in vertical mode
     ido-vertical-mode
+    
+    ;; enables silver seracher for emacs requires ag for linux
+    ag
 
     ;; shows avaliable keys for set prefixes
     guide-key
@@ -95,17 +126,9 @@
     ;; project navigation
     projectile
 
-    ;; colorful parenthesis matching
-    rainbow-delimiters
-
-    ;; edit html tags like sexps
-    tagedit
-    
-    ;; major mode for editing markdown files
-    markdown-mode
-    
     ;; git integration
-    magit))
+    magit
+    ))
 
 ;; On OS X, an Emacs instance started from the graphical user
 ;; interface will have a different environment than a shell in a
@@ -135,7 +158,6 @@
 ;; Adding this code will make Emacs enter yaml mode whenever you open
 ;; a .yml file
 (add-to-list 'load-path "~/.emacs.d/vendor")
-
 
 ;;;;
 ;; Customization
@@ -170,5 +192,8 @@
 ;; Langauage-specific
 (load "setup-clojure.el")
 (load "setup-js.el")
-(load "setup-prolog.el")
 (load "setup-markdown.el")
+(load "setup-web.el")
+
+;; Settings for the IRC client in Emacs
+(load "erc-setup.el")
