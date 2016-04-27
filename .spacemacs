@@ -38,8 +38,6 @@ values."
      shell-scripts
      org
      (shell :variables shell-default-shell 'multiterm)
-     (evil-snipe :variables
-                 evil-snipe-enable-alternative-f-and-t-behavior t)
      sql
      clojure
      )
@@ -113,7 +111,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Inconsolata"
                                :size 13
                                :weight normal
                                :width normal
@@ -247,17 +245,26 @@ any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
   )
 
+
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+
   ;; Set escape keybinding to "jk"
   (setq-default evil-escape-key-sequence "jk")
 
-  ;; activate global linum
-  (global-linum-mode)
-  (with-eval-after-load 'linum
-    (linum-relative-toggle))
+  ;; Free up some space in powerline
+  (setq powerline-default-separator 'alternate)
+
+  ;; Awsome feature you can jump between windows and frames using avy jump
+  avy-all-windows 'all-frames
+
+  ;; ;; activate global linum
+  ;; (global-linum-mode)
+  ;; (with-eval-after-load 'linum
+  ;;   (linum-relative-toggle))
 
   ;;Setup 2 spaces web and js as indentation
   (setq-default
@@ -278,9 +285,6 @@ layers configuration. You are free to put any user code."
               (make-local-variable 'js-indent-level)
               (setq js-indent-level 2)))
 
-  ;; Change default font
-  (add-to-list 'default-frame-alist '(font . "Inconsolata"))
-
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
     (setq emmet-move-cursor-between-quotes t) ;; default nil
@@ -288,6 +292,16 @@ layers configuration. You are free to put any user code."
     )
   (add-hook 'web-mode-hook  'my-web-mode-hook)
   (add-hook 'react-mode-hook 'emmet-mode-hook)
+
+  ;; OBS This will be the default in later versions so i can remove this function
+  (with-eval-after-load 'flycheck
+    (defun favetel/goto-flycheck-error-list ()
+      "Open and go to the error list buffer."
+      (interactive)
+      (unless (get-buffer-window (get-buffer flycheck-error-list-buffer))
+        (flycheck-list-errors))
+      (switch-to-buffer-other-window flycheck-error-list-buffer))
+    (spacemacs/set-leader-keys "eL" 'favetel/goto-flycheck-error-list))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
