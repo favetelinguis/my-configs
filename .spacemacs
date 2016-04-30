@@ -26,7 +26,11 @@ values."
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t)
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-global-margin t)
      git
+     github
      emacs-lisp
      restclient
      erc
@@ -112,7 +116,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Inconsolata"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -251,6 +255,11 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+
+  ;; Move project stuff to j and join to p
+  ;; Bind helm to jj instaed of ph
+  (bepo/leader-swap-keys "j" "p")
+  (bepo/leader-swap-keys "jh" "jj")
 
   ;; Set escape keybinding to "jk"
   (setq-default evil-escape-key-sequence "jk")
