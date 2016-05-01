@@ -35,6 +35,7 @@ values."
      restclient
      erc
      syntax-checking
+     semantic
      react
      html
      markdown
@@ -256,13 +257,8 @@ in `dotspacemacs/user-config'."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  ;; Move project stuff to j and join to p
-  ;; Bind helm to jj instaed of ph
-  (bepo/leader-swap-keys "j" "p")
-  (bepo/leader-swap-keys "jh" "jj")
-
   ;; Set escape keybinding to "jk"
-  (setq-default evil-escape-key-sequence "jk")
+  ;; (setq-default evil-escape-key-sequence "jk")
 
   ;; Free up some space in powerline
   (setq powerline-default-separator 'alternate)
@@ -320,6 +316,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Documents/code/clojure/bfg/backlog.org")))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
