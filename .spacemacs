@@ -13,7 +13,7 @@ values."
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("/Users/henke/Documents/code/emacs/layers/")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
@@ -36,15 +36,29 @@ values."
      erc
      syntax-checking
      semantic
-     react
+     (ranger :variables
+             ranger-cleanup-on-disable t
+             ranger-show-dotfiles t)
+     fasd
      html
      markdown
+     (python :variables
+             python-test-runner 'pytest
+             python-enable-yapf-format-on-save t)
      javascript
+     react
      shell-scripts
      org
-     (shell :variables shell-default-shell 'multiterm)
+     (shell :variables shell-default-shell 'eshell)
      sql
      clojure
+     haskell
+     (scala :variables
+            scala-enable-eldoc t
+            scala-auto-insert-asterisk-in-comments t)
+
+     ;; My local layers packages
+     bfg
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -219,7 +233,7 @@ values."
    dotspacemacs-line-numbers nil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -248,6 +262,8 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+  ;; Add my custom packages to emacs load path
+  (add-to-list 'load-path "/Users/henke/Documents/code/emacs/emacs-packages/")
   )
 
 
