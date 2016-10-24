@@ -37,6 +37,7 @@ values."
      syntax-checking
      semantic
      (ranger :variables
+             ranger-show-preview t
              ranger-cleanup-on-disable t
              ranger-show-dotfiles t)
      fasd
