@@ -1,6 +1,5 @@
 "use :actionlist to get name of avaliable actions
 set surround
-imap ff <Esc>
 
 let mapleader = " "
 " ============================================================================
@@ -110,3 +109,4 @@ nnoremap g<c-i> <c-i>
 nnoremap / :action Find<cr>
 " but preserve ideavim search
 nnoremap g/ /
+
