@@ -46,11 +46,14 @@ values."
      emacs-lisp
      java
      git
+     fasd
      ;; markdown
      ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-default-height 30
+            shell-default-position 'bottom)
+     shell-scripts
      ;; spell-checking
      syntax-checking
      version-control
@@ -307,7 +310,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;;; Escape sequence for evil, bind esc to jj and set the delay
-  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-key-sequence "fd")
   (setq-default evil-escape-delay 0.2)
   )
 
