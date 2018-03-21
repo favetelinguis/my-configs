@@ -31,6 +31,9 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     mylayer
+     (vinegar :variables
+              vinegar-reuse-dired-buffer t)
      python
      ipython-notebook
      markdown
@@ -40,23 +43,22 @@ values."
      emacs-lisp
      java
      git
-     ranger
      fasd
      org
      (shell :variables
-            shell-default-shell 'shell
+            shell-default-shell 'eshell
             shell-default-height 40
-            shell-default-position 'top)
+            shell-default-position 'bottom)
      shell-scripts
      syntax-checking
      version-control
      csv
      semantic
-     cmake
+     ;cmake
      docker
      gtags
      github
-     gpu
+     ;gpu
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
