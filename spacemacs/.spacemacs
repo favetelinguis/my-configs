@@ -42,7 +42,8 @@ values."
      helm
      auto-completion
      emacs-lisp
-     java
+     (java :variables
+           java-backend 'ensime)
      git
      org
      (shell :variables
@@ -324,6 +325,8 @@ you should place your code here."
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
   ;;; Bind j-w to ; instead
   (define-key evil-normal-state-map (kbd ";") 'evil-avy-goto-word-or-subword-1)
+  ;;; Fixes issue with smartparens in xml files crashing emacs
+  (show-smartparens-global-mode -1)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
