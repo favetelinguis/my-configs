@@ -321,11 +321,11 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-;;; Activate balanced parens in all supported modes
+  ;;; Activate balanced parens in all supported modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
-;;; Bind j-w to ; instead
+  ;;; Bind j-w to ; instead
   (define-key evil-normal-state-map (kbd ";") 'evil-avy-goto-word-or-subword-1)
-;;; Fixes issue with smartparens in xml files crashing emacs
+  ;;; Fixes issue with smartparens in xml files crashing emacs
   (show-smartparens-global-mode -1)
   ;;; Scroll before reaching top or bottm
   (setq-default scroll-margin 3)
