@@ -37,6 +37,7 @@ values."
               vinegar-reuse-dired-buffer t)
      python
      ipython-notebook
+     yaml
      markdown
      c-c++
      helm
@@ -53,6 +54,10 @@ values."
      shell-scripts
      syntax-checking
      version-control
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-diff-side 'left
+                      version-control-global-margin t)
      csv
      semantic
      docker
