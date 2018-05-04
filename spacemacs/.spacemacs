@@ -334,6 +334,16 @@ you should place your code here."
   (show-smartparens-global-mode -1)
   ;;; Scroll before reaching top or bottm
   (setq-default scroll-margin 3)
+  ;;; where are my git repos located
+  (setq magit-repository-directories '("~/repos" 2))
+  ;;; Make so that i dont get asked every time to save files when using magit commands
+  (setq magit-save-repository-buffers nil)
+  ;;; Disable all anoing things in lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-peek-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-imenu-enable nil
+        lsp-ui-flycheck-enable t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
