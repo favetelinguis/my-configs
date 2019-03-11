@@ -3,3 +3,4 @@
 .xmonad/xmonad.o
 .emacs.d/elpa/*
 *.dat
+.DS_STORE
