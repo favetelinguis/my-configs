@@ -1,3 +1,13 @@
+" Activate true color for nvim
+set termguicolors
+
+" exit insertmode
+inoremap fd <ESC>
+" set leader
+let mapleader = "\<Space>"
+set nowrap           " do not automatically wrap on load
+set formatoptions-=t " do not automatically wrap text when typing
+
 " Try to load minpac.
 packadd minpac
 
@@ -18,6 +28,8 @@ else
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('mhinz/vim-grepper')
   call minpac#add('yssl/QFEnter')
+  call minpac#add('tpope/vim-vinegar')
+  call minpac#add('tpope/vim-commentary')
 
   " Plugin settings here.
   " vim-grepper
