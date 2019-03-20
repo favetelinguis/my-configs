@@ -31,6 +31,40 @@ else
   call minpac#add('tpope/vim-vinegar')
   call minpac#add('tpope/vim-commentary')
 
+  " RUST
+  call minpac#add('rust-lang/rust.vim')
+  call minpac#add('ncm2/ncm2')
+  call minpac#add('roxma/nvim-yarp')
+
+
+  call minpac#add('autozimu/LanguageClient-neovim', {'do': {-> system('bash install.sh')}})
+
+  "ncm2
+  " enable ncm2 for all buffers
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+
+  " IMPORTANT: :help Ncm2PopupOpen for more information
+  set completeopt=noinsert,menuone,noselect
+
+  " Rust settings
+  let g:rustfmt_autosave = 1 " Formats buffer on save
+
+  " << LSP >>
+  let g:LanguageClient_autoStart = 0
+  nnoremap <leader>lcs :LanguageClientStart<CR>
+
+  " if you want it to turn on automatically
+  " let g:LanguageClient_autoStart = 1
+
+  let g:LanguageClient_serverCommands = {
+      \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+      \ }
+
+  noremap <silent> <leader>h :call LanguageClient_textDocument_hover()<CR>
+  noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+  noremap <silent> <leader>r :call LanguageClient_textDocument_rename()<CR>
+  " << LSP >>
+
   " Plugin settings here.
   " vim-grepper
   let g:grepper = {}
