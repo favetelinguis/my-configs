@@ -30,6 +30,8 @@ else
   call minpac#add('yssl/QFEnter')
   call minpac#add('tpope/vim-vinegar')
   call minpac#add('tpope/vim-commentary')
+  call minpac#add('jiangmiao/auto-pairs')
+  call minpac#add('luochen1990/rainbow')
 
   " RUST
   call minpac#add('rust-lang/rust.vim')
@@ -45,6 +47,7 @@ else
 
   " IMPORTANT: :help Ncm2PopupOpen for more information
   set completeopt=noinsert,menuone,noselect
+  set shortmess+=c
 
   " Rust settings
   let g:rustfmt_autosave = 1 " Formats buffer on save
@@ -66,6 +69,8 @@ else
   " << LSP >>
 
   " Plugin settings here.
+  " ranbow params
+  let g:rainbow_active = 1
   " vim-grepper
   let g:grepper = {}
   let g:grepper.tools = ['rg', 'git']
