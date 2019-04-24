@@ -1,3 +1,7 @@
+" Ignore case in search if search have upper case in it include case
+set ignorecase
+set smartcase
+
 " Activate true color for nvim
 set termguicolors
 
@@ -23,8 +27,8 @@ else
   " Additional plugins here.
   call minpac#add('junegunn/fzf')
   call minpac#add('easymotion/vim-easymotion')
-  call minpac#add('joshdick/onedark.vim', {'type': 'opt'})
-  call minpac#add('itchyny/lightline.vim')
+  call minpac#add('morhetz/gruvbox')
+  call minpac#add('vim-airline/vim-airline')
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('mhinz/vim-grepper')
   call minpac#add('yssl/QFEnter')
@@ -32,41 +36,7 @@ else
   call minpac#add('tpope/vim-commentary')
   call minpac#add('jiangmiao/auto-pairs')
   call minpac#add('luochen1990/rainbow')
-
-  " RUST
-  call minpac#add('rust-lang/rust.vim')
-  call minpac#add('ncm2/ncm2')
-  call minpac#add('roxma/nvim-yarp')
-
-
-  call minpac#add('autozimu/LanguageClient-neovim', {'do': {-> system('bash install.sh')}})
-
-  "ncm2
-  " enable ncm2 for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-
-  " IMPORTANT: :help Ncm2PopupOpen for more information
-  set completeopt=noinsert,menuone,noselect
-  set shortmess+=c
-
-  " Rust settings
-  let g:rustfmt_autosave = 1 " Formats buffer on save
-
-  " << LSP >>
-  let g:LanguageClient_autoStart = 0
-  nnoremap <leader>lcs :LanguageClientStart<CR>
-
-  " if you want it to turn on automatically
-  " let g:LanguageClient_autoStart = 1
-
-  let g:LanguageClient_serverCommands = {
-      \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-      \ }
-
-  noremap <silent> <leader>h :call LanguageClient_textDocument_hover()<CR>
-  noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-  noremap <silent> <leader>r :call LanguageClient_textDocument_rename()<CR>
-  " << LSP >>
+  call minpac#add('miyakogi/conoline.vim')
 
   " Plugin settings here.
   " ranbow params
@@ -103,12 +73,10 @@ else
 
   " theme config
   syntax on
-  packadd! onedark.vim " must load last?
-  colorscheme onedark
+  colorscheme gruvbox
+  " airline config
+  let g:airline_theme = 'gruvbox'
 
-  " lightline config
-  set noshowmode " remove -- INSERT -- in ex prompt
-  let g:lightline = { 'colorscheme': 'onedark' } " set color scheme for lightline
 endif
 
 if has('nvim')
