@@ -1,54 +1,60 @@
 "use :actionlist to get name of avaliable actions
-set surround
-
+"todo stop using leader
 let mapleader = ","
-" ============================================================================
-" Editor control
-" ============================================================================
 
 " Enter the command-line mode
 noremap <CR> :
-
-" Reload .ideavimrc
-nnoremap <leader>vs :source ~/.ideavimrc<CR>
 
 " replicate some easymotion
 nmap s :action AceAction<CR>
 
 " use idea default search instead of vim
-nnoremap / :action Find<CR>
+" try not to use search nnoremap / :action Find<CR>
+" used with HighlightUsagesInFile
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
 
-set hlsearch
-set scrolloff=3
-set ignorecase smartcase
-set showmode
-set history=1000
-
-" easy system clipboard copy/paste
-noremap <leader>y "*y
-noremap <leader>Y "*Y
-noremap <leader>p "*p
-noremap <leader>P "*P
+" use system clipboard as default
+set clipboard+=unnamed
 
 " built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+nnoremap <c-o> :action Back<CR>
+nnoremap <c-i> :action Forward<CR>
 " but preserve ideavim defaults
 nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
 
+" Actually change stuff in buffer
+nnoremap <a-j> :action EditorCompleteStatement<CR>
+nnoremap <a-k> :action Refactorings.QuickListPopupAction<CR>
+nnoremap <a-l> :action InsertLiveTemplate<CR>
+nnoremap <a-;> :action SurroundWithLiveTemplate<CR>
+nnoremap <a-n> :action Generate<CR>
+nnoremap <a-v> :action PasteMultiple<CR>
+""""""""
+
+" Ctrl bindings non code related todo mayby it should be RunClass DebugClass
+nnoremap <c-h> :action QuickJavaDoc<CR>
+nnoremap <c-r> :action Run<CR>
+nnoremap <c-d> :action Debug<CR>
+nnoremap <c-b> :action ToggleLineBreakpoint<CR>
+""""""""
+
 " GoTo Bindings
+nmap gj :action FileStructurePopup<CR>
+nmap gl :action HighlightUsagesInFile<CR>
+nmap gf :action GotoFile<CR>
 nmap gd :action GotoDeclaration<CR>
+nmap gs :action GotoSymbol<CR>
+nmap ga :action GotoAction<CR>
 nmap gi :action GotoImplementation<CR>
 nmap gt :action GotoTest<CR>
 nmap ge :action GotoNextError<CR>
 nmap gE :action GotoPreviousError<CR>
-nmap ga :action GotoAction<CR>
-nmap gs :action GotoSymbol<CR>
 nmap gc :action GotoClass<CR>
-nmap gf :action GotoFile<CR>
-nmap g/ :action FindInPath<CR>
 nmap gh :action SearchEverywhere<CR>
+nmap gu :action ShowUsages<CR>
+nmap g/ :action FindInPath<CR>
 " Clojure
 nmap gk :action GotoKeyword<CR>
 nmap gn :action GotoNamespace<CR>
