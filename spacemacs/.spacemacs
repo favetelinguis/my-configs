@@ -31,20 +31,12 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     clojure
-     mylayer
+     html
      (vinegar :variables
               vinegar-reuse-dired-buffer t)
-     python
-     ipython-notebook
-     yaml
-     markdown
-     c-c++
      helm
      auto-completion
      emacs-lisp
-     (java :variables
-           java-backend 'ensime)
      git
      org
      (shell :variables
@@ -58,10 +50,10 @@ values."
                       version-control-diff-tool 'git-gutter+
                       version-control-diff-side 'left
                       version-control-global-margin t)
-     csv
-     semantic
-     docker
      github
+     (clojure :variables
+              clojure-enable-sayid t
+              clojure-enable-clj-refactor t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -326,25 +318,16 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;;; Activate balanced parens in all supported modes
+;;; Activate balanced parens in all supported modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
-  ;;; Bind j-w to ; instead
+;;; Bind j-w to ; instead
   (define-key evil-normal-state-map (kbd ";") 'evil-avy-goto-word-or-subword-1)
-  ;;; Fixes issue with smartparens in xml files crashing emacs
+;;; Fixes issue with smartparens in xml files crashing emacs
   (show-smartparens-global-mode -1)
-  ;;; Scroll before reaching top or bottm
+;;; Scroll before reaching top or bottm
   (setq-default scroll-margin 3)
-  ;;; where are my git repos located
-  (setq magit-repository-directories '("~/repos" 2))
-  ;;; Make so that i dont get asked every time to save files when using magit commands
-  (setq magit-save-repository-buffers nil)
-  ;;; Disable all anoing things in lsp-ui
-  (setq lsp-ui-doc-enable t
-        lsp-ui-peek-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-imenu-enable nil
-        lsp-ui-flycheck-enable t)
-  )
+;;; where are my git repos located
+  (setq magit-repository-directories '("~/repos" 2)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -360,7 +343,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet-snippets symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons all-the-icons memoize sayid realgud test-simple loc-changes load-relative pippel pipenv password-generator overseer org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain ob-ipython nameless mvn meghanada maven-test-mode magit-gh-pulls importmagic epc ctable concurrent htmlize helm-xref helm-rtags helm-purpose window-purpose imenu-list groovy-mode groovy-imports gradle-mode google-c-style gnuplot github-search github-clone gist gh marshal logito pcache ht flycheck-rtags flycheck-bashate evil-org evil-lion evil-cleverparens ensime sbt-mode scala-mode ein skewer-mode request-deferred websocket deferred js2-mode simple-httpd editorconfig dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat csv-mode counsel-projectile counsel swiper ivy company-rtags rtags clojure-snippets clojure-cheatsheet clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider seq queue clojure-mode centered-cursor-mode browse-at-remote yapfify xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smeargle shell-pop restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-bullets open-junk-file neotree multi-term move-text markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hy-mode dash-functional hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fasd fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump disaster diminish define-word cython-mode company-shell company-emacs-eclim eclim company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bind-map bind-key auto-yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet which-key undo-tree org-plus-contrib mmm-mode hydra graphviz-dot-mode evil-unimpaired f s dash diff-hl company-statistics company async aggressive-indent adaptive-wrap ace-window avy zenburn-theme))))
+    (web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smeargle shell-pop restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-bullets open-junk-file neotree multi-term move-text markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint insert-shebang indent-guide hy-mode dash-functional hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fasd fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump disaster diminish define-word cython-mode company-shell company-emacs-eclim eclim company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bind-map bind-key auto-yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet which-key undo-tree org-plus-contrib mmm-mode hydra graphviz-dot-mode evil-unimpaired f s dash diff-hl company-statistics company async aggressive-indent adaptive-wrap ace-window avy zenburn-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

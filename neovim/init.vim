@@ -1,3 +1,6 @@
+" Use space not tabs
+set tabstop=4 shiftwidth=4 expandtab
+
 " Ignore case in search if search have upper case in it include case
 set ignorecase
 set smartcase
@@ -37,8 +40,17 @@ else
   call minpac#add('jiangmiao/auto-pairs')
   call minpac#add('luochen1990/rainbow')
   call minpac#add('miyakogi/conoline.vim')
+  call minpac#add('w0rp/ale')
+
+  " Haskell specific
+  call minpac#add('alx741/vim-hindent')
 
   " Plugin settings here.
+  " ALE settings
+  " Use the quickfix list for ALE and not the loclist
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 1
+
   " ranbow params
   let g:rainbow_active = 1
   " vim-grepper
