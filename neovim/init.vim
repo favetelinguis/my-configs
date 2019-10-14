@@ -40,10 +40,7 @@ else
   call minpac#add('jiangmiao/auto-pairs')
   call minpac#add('luochen1990/rainbow')
   call minpac#add('miyakogi/conoline.vim')
-  call minpac#add('w0rp/ale')
   call minpac#add('christoomey/vim-tmux-navigator')
-  " Haskell specific
-  call minpac#add('alx741/vim-hindent')
 
   " Navigate panes without having to use w
   nnoremap <C-J> <C-W><C-J>
@@ -52,12 +49,8 @@ else
   nnoremap <C-H> <C-W><C-H>
 
   " Plugin settings here.
-  " ALE settings
-  " Use the quickfix list for ALE and not the loclist
-  let g:ale_set_loclist = 0
-  let g:ale_set_quickfix = 1
 
-  " ranbow params
+  " rainbow params
   let g:rainbow_active = 1
   " vim-grepper
   let g:grepper = {}
