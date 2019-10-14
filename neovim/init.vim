@@ -41,6 +41,15 @@ else
   call minpac#add('luochen1990/rainbow')
   call minpac#add('miyakogi/conoline.vim')
   call minpac#add('christoomey/vim-tmux-navigator')
+  " Golang support
+  call minpac#add('fatih/vim-go')
+
+  " Golang config
+  let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
+  let g:go_auto_type_info = 1           " Automatically get signature/type info for object under cursor 
+  " Bind omnicomplete to show completion popup
+  inoremap <C-Space> <C-x><C-o>
+  inoremap <C-@> <C-Space><Paste>
 
   " Navigate panes without having to use w
   nnoremap <C-J> <C-W><C-J>
