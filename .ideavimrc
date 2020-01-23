@@ -8,11 +8,8 @@ noremap <CR> :
 " replicate some easymotion
 nmap s :action AceAction<CR>
 
-" use idea default search instead of vim
-" try not to use search nnoremap / :action Find<CR>
-" used with HighlightUsagesInFile
-nnoremap n :action FindNext<CR>
-nnoremap N :action FindPrevious<CR>
+set incsearch "use incremental search
+set ignorecase "ignore case in search
 
 " use system clipboard as default
 set clipboard+=unnamed
@@ -35,9 +32,9 @@ nnoremap <a-v> :action PasteMultiple<CR>
 
 " Ctrl bindings non code related todo mayby it should be RunClass DebugClass
 nnoremap <c-h> :action QuickJavaDoc<CR>
-nnoremap <c-r> :action Run<CR>
-nnoremap <c-d> :action Debug<CR>
-nnoremap <c-b> :action ToggleLineBreakpoint<CR>
+nnoremap <c-r>r :action RunClass<CR>
+nnoremap <c-r>d :action DebugClass<CR>
+nnoremap <c-r>b :action ToggleLineBreakpoint<CR>
 """"""""
 
 " GoTo Bindings
