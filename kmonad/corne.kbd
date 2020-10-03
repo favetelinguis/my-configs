@@ -24,8 +24,8 @@
   ;; ---------------
 
   ;; tumb cluster
-  stt (multi-tap 145 spc tab)
-  ssh (tap-hold-next-release 145 @stt lsft)
+  ss (tap-next spc lsft)
+  rt (tap-hold-next-release 145 ent tab)
   ;; ---------------
 
   ;; left homerow
@@ -74,7 +74,7 @@
   @as= q    w    @elm r    t    y    u    @irm o    p    @as[  
   @as- a    @sla @dlc @fl1 g    h    @jl2 @krc @lra @as; @as'   
   @as] @as` z    x    c    v    b    n    m    @as, @as. @as/ @as\
-            esc            @stt           ret
+            esc            @ss            @rt
 )
 
 (deflayer numbers
