@@ -13,7 +13,7 @@
 (defsrc
   tab  q    w    e    r    t    y    u    i    o    p    [    
   caps a    s    d    f    g    h    j    k    l    ;    '    
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
             lalt           spc            ralt
 )
 
@@ -73,21 +73,21 @@
 (deflayer default
   @as= q    w    @elm r    t    y    u    @irm o    p    @as[  
   @as- a    @sla @dlc @fl1 g    h    @jl2 @krc @lra @as; @as'   
-  @as] z    x    c    v    b    n    m    @as, @as. @as/ @as\
+  @as] @as` z    x    c    v    b    n    m    @as, @as. @as/ @as\
             esc            @stt           ret
 )
 
 (deflayer numbers
   _    _    @as1 @as2 @as3 _    _    _    _    _    -    _
   _    _    @as4 @as5 @as6 @as0 _    _    _    _    _    _
-  _    _    @as7 @as8 @as9 _    _    _    _    _    _    _
+  _    _    _    @as7 @as8 @as9 _    _    _    _    _    _    _
             _              bspc          _
 )
 
 (deflayer arrows
-  _    _    _    _    _    _    _    _    _    _    @as` _
-  _    _    _    _    _    _    lft  down up   rght _    _
   _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    lft  down up   rght _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
             _              bspc           _
 )
 
@@ -95,7 +95,7 @@
 (deflayer template
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
             _              _              _
 )
 |#
