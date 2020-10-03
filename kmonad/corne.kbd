@@ -24,7 +24,8 @@
   ;; ---------------
 
   ;; tumb cluster
-  ssh (tap-hold-next-release 145 spc lsft)
+  stt (multi-tap 145 spc tab)
+  ssh (tap-hold-next-release 145 @stt lsft)
   ;; ---------------
 
   ;; left homerow
@@ -41,39 +42,53 @@
   lra (tap-hold-next-release 145 l ralt)
   ;; ---------------
 
-;; s lalt if hold
-;; d lctrl if hold
-;; f arrow layer and fjong esc if dubbeltap
-;; e lmet
-;; j number layer
-;; k rctrl
-;; l ralt
-;; i rmet
+  ;; autoshift default layer
+  as= (tap-hold-next-release 145 = +)
+  as- (tap-hold-next-release 145 - \_)
+  as] (tap-hold-next-release 145 ] })
+  as[ (tap-hold-next-release 145 [ {)
+  as' (tap-hold-next-release 145 ' ")
+  as\ (tap-hold-next-release 145 \ |)
+  as; (tap-hold-next-release 145 ; :)
+  as/ (tap-hold-next-release 145 / ?)
+  as. (tap-hold-next-release 145 . >)
+  as, (tap-hold-next-release 145 , <)
+  ;; autoshift numbers layer
+  as1 (tap-hold-next-release 145 1 !)
+  as2 (tap-hold-next-release 145 2 @)
+  as3 (tap-hold-next-release 145 3 #)
+  as4 (tap-hold-next-release 145 4 $)
+  as5 (tap-hold-next-release 145 5 %)
+  as6 (tap-hold-next-release 145 6 ^)
+  as7 (tap-hold-next-release 145 7 &)
+  as8 (tap-hold-next-release 145 8 *)
+  as9 (tap-hold-next-release 145 9 \()
+  as0 (tap-hold-next-release 145 0 \))
+  ;; autoshift arrows layer
+  as` (tap-hold-next-release 145 ` ~)
+  ;; ---------------
 
-;; keys lft rght ´
-
-;; spc lsft if hold tab if dubbel taped
 )
 
 (deflayer default
-  =    q    w    @elm r    t    y    u    @irm o    p    [  
-  -    a    @sla @dlc @fl1 g    h    @jl2 @krc @lra ;    '   
-  ]    z    x    c    v    b    n    m    ,    .    /    \
-            bspc           @ssh           ret
+  @as= q    w    @elm r    t    y    u    @irm o    p    @as[  
+  @as- a    @sla @dlc @fl1 g    h    @jl2 @krc @lra @as; @as'   
+  @as] z    x    c    v    b    n    m    @as, @as. @as/ @as\
+            esc            @stt           ret
 )
 
 (deflayer numbers
-  _    _    1    2    3    _   _    _    _    _    -    _
-  _    _    4    5    6    0   _    _    _    _    _    _
-  _    _    7    8    9    _   _    _    _    _    _    _
-            _              _              _
+  _    _    @as1 @as2 @as3 _    _    _    _    _    -    _
+  _    _    @as4 @as5 @as6 @as0 _    _    _    _    _    _
+  _    _    @as7 @as8 @as9 _    _    _    _    _    _    _
+            _              bspc          _
 )
 
 (deflayer arrows
-  _    _    _    _    _    _    _    _    _    _    ´    _
+  _    _    _    _    _    _    _    _    _    _    @as` _
   _    _    _    _    _    _    lft  down up   rght _    _
   _    _    _    _    _    _    _    _    _    _    _    _
-            _              _              _
+            _              bspc           _
 )
 
 #|
