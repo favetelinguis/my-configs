@@ -8,6 +8,9 @@ noremap <CR> :
 " replicate some easymotion
 nmap s :action AceAction<CR>
 
+" akways center cursor
+set scrolloff=999
+
 " better search
 set incsearch
 set ignorecase
