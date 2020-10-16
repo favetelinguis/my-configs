@@ -8,8 +8,10 @@ noremap <CR> :
 " replicate some easymotion
 nmap s :action AceAction<CR>
 
-set incsearch "use incremental search
-set ignorecase "ignore case in search
+" better search
+set incsearch
+set ignorecase
+set hlsearch 
 
 " use system clipboard as default
 set clipboard+=unnamed
