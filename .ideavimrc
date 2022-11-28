@@ -9,7 +9,7 @@ noremap <CR> :
 nmap s :action AceAction<CR>
 
 " akways center cursor
-set scrolloff=999
+set scrolloff=5
 
 " better search
 set incsearch
